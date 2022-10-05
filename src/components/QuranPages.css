@@ -1,10 +1,10 @@
 @font-face {
   font-family: iranSans;
-  src: url("./fonts/IRANSansXFaNum-Regular.woff");
+  src: url("../assets/fonts/IRANSansXFaNum-Regular.woff");
 }
 @font-face {
   font-family: quranFont;
-  src: url("./fonts/me-quran.woff");
+  src: url("../assets/fonts/me-quran.woff");
 }
 
 ul {
@@ -24,7 +24,7 @@ li {
   max-width: 100%;
   font-family: iranSans;
   background-color: #82bbca;
-  background-image: url("./img/pattern-body.76e29d6.png");
+  background-image: url("../assets/img/pattern-body.76e29d6.png");
   height: 100vh;
 }
 .top__header-wrappper {
@@ -43,7 +43,7 @@ li {
       transparent 2%,
       #82bbca 55%
     ),
-    url("./img/main-header-pattern.0da8e05.png");
+    url("../assets/img/main-header-pattern.0da8e05.png");
   background-size: cover;
   color: #fff;
   border: 3px solid rgb(219, 219, 23);
@@ -76,7 +76,7 @@ li {
 }
 .search-wrapper {
   background-color: #faf9f6;
-  background-image: url("./img/nasim-rezvan-bg-pattern.18658f7.png");
+  background-image: url("../assets/img/nasim-rezvan-bg-pattern.18658f7.png");
 }
 
 nav {
@@ -219,7 +219,8 @@ nav ul {
   color: #fff;
 }
 .quran__banner-container {
-  background: rgb(30, 160, 192) url("./img/quran-back.svg") no-repeat 100px;
+  background: rgb(30, 160, 192) url("../assets/img/quran-back.svg") no-repeat
+    100px;
   background-size: cover;
   color: #fff;
   text-align: center;

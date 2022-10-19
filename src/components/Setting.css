@@ -1,0 +1,233 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+li {
+  list-style-type: none;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.top__header-wrappper {
+  padding: 0.5rem;
+}
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-header__gradient {
+  background: linear-gradient(
+      90deg,
+      transparent 11%,
+      transparent 2%,
+      #82bbca 55%
+    ),
+    url("../assets/img/main-header-pattern.0da8e05.png");
+  background-size: cover;
+  color: #fff;
+  border: 3px solid rgb(219, 219, 23);
+  border-radius: 2rem;
+}
+
+.top-header-desc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.top-header-desc__text {
+  text-align: right;
+}
+.top-header-desc__text h3 {
+  font-size: 1rem;
+}
+.top-header-desc__text p {
+  margin-top: -0.6rem;
+  font-size: 0.75rem;
+}
+.top-header__icon-wrapper {
+  margin: 0.5rem 1rem 0rem 1rem;
+}
+
+.back__img {
+  width: 1.7rem;
+  height: 1.7rem;
+  margin: 0.3rem 0.7rem 0 1rem;
+}
+
+nav {
+  box-shadow: 2px 4px 36px -3px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 2px 4px 36px -3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 4px 36px -3px rgba(0, 0, 0, 0.75);
+  padding: 0.3rem 0;
+  background-color: #fff;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  max-width: 37.5rem;
+  z-index: 100;
+}
+nav ul {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.home-nav {
+  border-radius: 100%;
+  padding: 0.5rem;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+}
+.haram-img {
+  width: 3rem;
+}
+.aye__container {
+  position: relative;
+}
+.aye__number {
+  position: absolute;
+  right: 1.065rem;
+  bottom: 0.95rem;
+  font-size: 0.9rem;
+  color: #444444;
+}
+
+.filter {
+  padding: 0 3rem;
+}
+.input__filter {
+  text-align: right;
+  outline: none;
+  border: 2px solid #8d8575;
+  padding: 0.5rem 0.3rem;
+  border-top: none;
+  position: absolute;
+  top: 2.1rem;
+  z-index: 10;
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+.input__filter::placeholder {
+  color: #d3d3d3;
+}
+.filter__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 2rem;
+}
+.filter__list-container {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #8d8575;
+  z-index: 20;
+  width: 12rem;
+  height: 2rem;
+  padding: 0.2rem 1rem;
+  border-radius: 3rem;
+}
+.filter__list button {
+  cursor: pointer;
+
+  background: transparent;
+  border: none;
+  font-size: 0.8rem;
+  color: #f3f3f3;
+}
+
+.filter__result-container {
+  padding: 3rem 0;
+}
+.gray {
+  background-color: rgba(225, 219, 208, 0.5);
+}
+.filter__result-container-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0.5rem;
+  color: #5f5036;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border-radius: 0.5rem;
+}
+.result__list-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.result__list-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.surah__title {
+  margin-right: 0.5rem;
+}
+
+.setting__wrapper {
+  padding: 1rem 1rem 3rem 1rem;
+}
+.search-wrapper {
+  background-color: #faf9f6;
+  background-image: url("../assets/img/nasim-rezvan-bg-pattern.18658f7.png");
+  padding: 1rem 0;
+}
+.setting-title {
+  margin-right: 1rem;
+}
+.translate__sec {
+  border: 1px solid rgb(218, 213, 213);
+  border-radius: 0.3rem;
+  background-color: white;
+  padding: 1rem;
+}
+.translate-label {
+  display: flex;
+}
+.translate-info__sec {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+.translate-info__sec p {
+  margin-right: 0.5rem;
+}
+.translate-info__sec img {
+  border-radius: 50%;
+  width: 2.3rem;
+  height: 2.3rem;
+  margin-right: 0.3rem;
+}
+.translate-size {
+  display: flex;
+  justify-content: space-around;
+}
+
+.translate__option-title {
+  text-align: center;
+  padding: 1rem;
+}
+.translate__text-setting {
+  padding: 1rem 3rem;
+}
+.examole__translate {
+  background-color: rgb(238, 237, 237);
+  padding: 1rem;
+  border-radius: 0.2rem;
+  margin: 1rem;
+}

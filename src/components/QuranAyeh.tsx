@@ -1,19 +1,84 @@
 import "./QuranPages.css";
+import QuranTraslateFarsi from "./QuranTranslate";
+import { v4 as uuidv4 } from "uuid";
+import { memo, useState } from "react";
+import { quranTextEmla } from "../datas/QuranTextEmla";
+import { QuranDataSura } from "../datas/quran-metadata";
+import { EmailShareButton } from "react-share";
+
+const audioHandler = async (ayehOrder: number, surahNumberCheck: number) => {
+  let surahNumber = surahNumberCheck + 1;
+  const ayehFormatGenerator = (number: number) => {
+    let result;
+    let numberLenght = number.toString().length;
+    if (numberLenght === 3) {
+      result = number;
+    } else if (numberLenght === 2) {
+      result = `0${number}`;
+    } else if (numberLenght === 1) {
+      result = `00${number}`;
+    }
+    return result;
+  };
+  const ayehNumberNew = ayehFormatGenerator(ayehOrder);
+  const surahNumberNew = ayehFormatGenerator(surahNumber);
+
+  let audioString = `http://www.everyayah.com/data/Hudhaify_32kbps/${surahNumberNew}${ayehNumberNew}.mp3`;
+  console.log(audioString);
+};
+
+interface QuranAyehPropsTypes {
+  ayeh: string;
+  ayehIndexSpliced: number;
+  pageArr: number[];
+  nextAyeh: string;
+  prevAyeh: string;
+  pageIndex: number;
+}
 
 const QuranAyeh = ({
   ayeh,
-  ayehIndex,
-}: {
-  ayeh: string;
-  ayehIndex: number;
-}) => {
+  ayehIndexSpliced,
+  pageArr,
+  nextAyeh,
+  prevAyeh,
+  pageIndex,
+}: QuranAyehPropsTypes) => {
+  const [isCopied, setIsCopied] = useState<boolean>(false);
+
+  let ayehIndex =
+    quranTextEmla.findIndex((ayehT, i, arr) => {
+      return ayeh === ayehT && arr[i + 1] === nextAyeh
+        ? ayeh === ayehT && arr[i + 1] === nextAyeh
+        : ayeh === ayehT && arr[i - 1] === prevAyeh;
+    }) + 1;
+
+  //number of ayeh  for current surah
+  let ayehOrder = 0;
+  //calculate surahnumber baed on what page we are in
+  let surahNumberCheck = QuranDataSura.findIndex((data: any, index) => {
+    let start = data[0];
+    let end = data[1] + data[0];
+    let newcounter = -1;
+    for (let i = start; i <= end; i++) {
+      newcounter++;
+      if (ayehIndex === i) {
+        ayehOrder = newcounter;
+        return index + 1;
+      }
+    }
+  });
+
   return (
     <>
-      <li className="search__result-list">
+      <li
+        onClick={() => audioHandler(ayehOrder, surahNumberCheck)}
+        className="search__result-list"
+      >
         <div className="search__result">
           <div className="search__result-icons">
             <div className="aye__container">
-              <span className="aye__number">{ayehIndex + 1}</span>
+              <span className="aye__number">{ayehOrder}</span>
               <svg
                 fill="none"
                 width="40"
@@ -39,30 +104,70 @@ const QuranAyeh = ({
                 />
               </svg>
             </div>
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 6 24"
-              className="svg more-svg"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="square"
-                strokeMiterlimit="10"
-                strokeWidth="2"
-                d="M5 12a2 2 0 10-4 0 2 2 0 004 0zm0-9a2 2 0 10-4 0 2 2 0 004 0zm0 18a2 2 0 10-4 0 2 2 0 004 0z"
-              />
-            </svg>
+            <div className="action-section">
+              <svg
+                onClick={() => {
+                  navigator.clipboard.writeText(ayeh);
+                  setIsCopied(true);
+                  setTimeout(() => {
+                    setIsCopied(false);
+                  }, 1500);
+                }}
+                width="25"
+                height="30"
+                viewBox="0 0 30 24"
+                className="svg more-svg"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="square"
+                  stroke-miterlimit="10"
+                  stroke-width="1.5"
+                  d="M14.797 3.587H1V19.97h13.797V3.587z"
+                />
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="square"
+                  stroke-miterlimit="10"
+                  stroke-width="1.5"
+                  d="M2.725 1h14.659v17.246M4.448 7.898h6.899m-6.899 3.45h6.899m-6.899 3.449h3.45"
+                />
+              </svg>
+
+              <EmailShareButton url={`/pages/${pageIndex}`} title="share">
+                <svg
+                  width="40"
+                  height="25"
+                  viewBox="0 0 30 24"
+                  className="svg more-svg"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M6.978 9.542l6.591-3.418m-6.591 6.334l6.591 3.418m-9.402-1.709a3.167 3.167 0 100-6.334 3.167 3.167 0 000 6.334zm12.214-6.334a3.167 3.167 0 100-6.333 3.167 3.167 0 000 6.333zm0 12.667a3.167 3.167 0 100-6.333 3.167 3.167 0 000 6.333z"
+                  />
+                </svg>
+              </EmailShareButton>
+            </div>
           </div>
           <div className="search__result-context">
             <p className="quran__text quran__text-weight">{ayeh}</p>
-            <p className="translate__text">به نام خداوند بخشنده مهربان</p>
+            <QuranTraslateFarsi
+              pageArr={pageArr}
+              key={uuidv4()}
+              ayehIndexSpliced={ayehIndexSpliced}
+            />
           </div>
         </div>
       </li>
+      {isCopied && <span className="copied">copied</span>}
     </>
   );
 };
 
-export default QuranAyeh;
+export default memo(QuranAyeh);

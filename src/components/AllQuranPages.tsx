@@ -58,67 +58,79 @@ const AllQuranPages = () => {
 
   return (
     <>
-      <button onClick={prevChangeHandler}>prev</button>
-      <button onClick={nextChangeHandler}>next</button>
-      {/* <img src={backPageImg} onClick={prevChangeHandler} /> */}
-      {/* <img src={nextPageImg} onClick={nextChangeHandler} /> */}
       <section className="search-wrapper">
-        <ul key={uuidv4()} className="search__result-wrapper">
-          <div className="quran__badge-container">
-            <span className="search__result-list-badge">
-              <span>{prev + 1}</span>صفحه
-            </span>
+        <div className="inner-search-wrapper">
+          <div onClick={prevChangeHandler} className="prev-arrow__wrapper">
+            <img
+              className="arrow-img"
+              src={backPageImg}
+              onClick={prevChangeHandler}
+            />
           </div>
-          {quranTextEmlaSliced.map((ayeh: string, i: number, arr) => {
-            return (
-              <React.Fragment key={uuidv4()}>
-                {QuranDataSura.map((data, index) => {
-                  const start = +data[0];
+          <div onClick={nextChangeHandler} className="next-arrow__wrapper">
+            <img
+              className="arrow-img"
+              src={nextPageImg}
+              onClick={nextChangeHandler}
+            />
+          </div>
+          <ul key={uuidv4()} className="search__result-wrapper">
+            <div className="quran__badge-container">
+              <span className="search__result-list-badge">
+                <span>{prev + 1}</span>صفحه
+              </span>
+            </div>
+            {quranTextEmlaSliced.map((ayeh: string, i: number, arr) => {
+              return (
+                <React.Fragment key={uuidv4()}>
+                  {QuranDataSura.map((data, index) => {
+                    const start = +data[0];
 
-                  const surahNumber = index + 1;
-                  const surahName = data[4];
+                    const surahNumber = index + 1;
+                    const surahName = data[4];
 
-                  const cts = arr[i + 3] ? arr[i + 3] : arr[i + 1];
-                  const ctsNum = arr[i + 3] ? 3 : 1;
+                    const cts = arr[i + 3] ? arr[i + 3] : arr[i + 1];
+                    const ctsNum = arr[i + 3] ? 3 : 1;
 
-                  if (
-                    ayeh === quranTextEmla[start] &&
-                    cts === quranTextEmla[start + ctsNum]
-                  ) {
-                    return (
-                      <div
-                        ref={addToRefs}
-                        id={`${surahNumber}`}
-                        key={index}
-                        className="quran__banner-container"
-                      >
-                        <p className="quran__text quran__title-text-weight">
-                          {surahName}
-                        </p>
-                        <p>
-                          <span>{surahNumber}</span>سوره
-                        </p>
-                        <p>{data[7] === "Meccan" ? "مکی" : "مدنی"}</p>
-                        {index + 1 !== 9 && index + 1 !== 1 && (
-                          <p>بسم الله الرحمن الرحیم</p>
-                        )}
-                      </div>
-                    );
-                  }
-                })}
-                <QuranAyeh
-                  pageArr={pageArr}
-                  key={uuidv4()}
-                  ayeh={ayeh}
-                  nextAyeh={arr[i + 1]}
-                  prevAyeh={arr[i - 1]}
-                  ayehIndexSpliced={i}
-                  pageIndex={prev + 1}
-                />
-              </React.Fragment>
-            );
-          })}
-        </ul>
+                    if (
+                      ayeh === quranTextEmla[start] &&
+                      cts === quranTextEmla[start + ctsNum]
+                    ) {
+                      return (
+                        <div
+                          ref={addToRefs}
+                          id={`${surahNumber}`}
+                          key={index}
+                          className="quran__banner-container"
+                        >
+                          <p className="quran__text quran__title-text-weight">
+                            {surahName}
+                          </p>
+                          <p>
+                            <span>{surahNumber}</span>سوره
+                          </p>
+                          <p>{data[7] === "Meccan" ? "مکی" : "مدنی"}</p>
+                          {index + 1 !== 9 && index + 1 !== 1 && (
+                            <p>بسم الله الرحمن الرحیم</p>
+                          )}
+                        </div>
+                      );
+                    }
+                  })}
+                  <QuranAyeh
+                    pageArr={pageArr}
+                    key={uuidv4()}
+                    ayeh={ayeh}
+                    nextAyeh={arr[i + 1]}
+                    prevAyeh={arr[i - 1]}
+                    ayehIndexSpliced={i}
+                    pageIndex={prev + 1}
+                  />
+                </React.Fragment>
+              );
+            })}
+          </ul>
+        </div>
       </section>
     </>
   );

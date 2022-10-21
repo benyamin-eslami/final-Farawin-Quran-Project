@@ -1,31 +1,12 @@
 import "./QuranPages.css";
 import QuranTraslateFarsi from "./QuranTranslate";
 import { v4 as uuidv4 } from "uuid";
-import { memo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { quranTextEmla } from "../datas/QuranTextEmla";
 import { QuranDataSura } from "../datas/quran-metadata";
 import { EmailShareButton } from "react-share";
-
-const audioHandler = async (ayehOrder: number, surahNumberCheck: number) => {
-  let surahNumber = surahNumberCheck + 1;
-  const ayehFormatGenerator = (number: number) => {
-    let result;
-    let numberLenght = number.toString().length;
-    if (numberLenght === 3) {
-      result = number;
-    } else if (numberLenght === 2) {
-      result = `0${number}`;
-    } else if (numberLenght === 1) {
-      result = `00${number}`;
-    }
-    return result;
-  };
-  const ayehNumberNew = ayehFormatGenerator(ayehOrder);
-  const surahNumberNew = ayehFormatGenerator(surahNumber);
-
-  let audioString = `http://www.everyayah.com/data/Hudhaify_32kbps/${surahNumberNew}${ayehNumberNew}.mp3`;
-  console.log(audioString);
-};
+import { useAppDispatch } from "./store/store";
+import { pauseAudio, playAudio } from "./store/features/audio";
 
 interface QuranAyehPropsTypes {
   ayeh: string;
@@ -44,6 +25,7 @@ const QuranAyeh = ({
   prevAyeh,
   pageIndex,
 }: QuranAyehPropsTypes) => {
+  const dispatch = useAppDispatch();
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
   let ayehIndex =
@@ -55,26 +37,34 @@ const QuranAyeh = ({
 
   //number of ayeh  for current surah
   let ayehOrder = 0;
-  //calculate surahnumber baed on what page we are in
+
+  //calculate surahnumber based on what page we are in
   let surahNumberCheck = QuranDataSura.findIndex((data: any, index) => {
     let start = data[0];
     let end = data[1] + data[0];
-    let newcounter = -1;
+    let newcounter: number = -1;
+    let firstFound: number = 0;
+
     for (let i = start; i <= end; i++) {
       newcounter++;
       if (ayehIndex === i) {
         ayehOrder = newcounter;
+
         return index + 1;
       }
     }
   });
 
+  const audioHandler = () => {
+    let surahNumberNew = (surahNumberCheck + 1).toString();
+    let ayehNumberNew = ayehOrder.toString();
+    dispatch(playAudio({ surahNumberNew, ayehNumberNew }));
+    dispatch(pauseAudio(false));
+  };
+
   return (
     <>
-      <li
-        onClick={() => audioHandler(ayehOrder, surahNumberCheck)}
-        className="search__result-list"
-      >
+      <li onClick={audioHandler} className="search__result-list">
         <div className="search__result">
           <div className="search__result-icons">
             <div className="aye__container">

@@ -2,9 +2,12 @@ import { useMemo } from "react";
 import { QuranDataSura } from "../datas/quran-metadata";
 import { surahPages } from "../datas/alllQuranPagesLogic";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "./store/store";
+import { pauseAudio, playAudio } from "./store/features/audio";
 
 const Surah = ({ search }: { search: string }) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const surahIndex = useMemo(
     () =>
       QuranDataSura.map((surah, index) => {
@@ -25,6 +28,16 @@ const Surah = ({ search }: { search: string }) => {
             onClick={() => {
               const surahStartPage = surahPages[surah.number - 1];
               navigate(`/pages/${surahStartPage}/${surah.number}`);
+              console.log(QuranDataSura[surah.number - 1][0].toString());
+              console.log(surah.number.toString());
+
+              dispatch(
+                playAudio({
+                  ayehNumberNew: QuranDataSura[surah.number - 1][0].toString(),
+                  surahNumberNew: surah.number.toString(),
+                })
+              );
+              dispatch(pauseAudio(false));
             }}
           >
             <div className="result__list-left">

@@ -2,15 +2,18 @@ import backImg from "../../assets/img/back.svg";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../QuranPages.css";
+import { pauseAudio } from "../store/features/audio";
+import { useAppDispatch } from "../store/store";
 
 const Header = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   return (
     <div className="top__header-wrappper">
       <div className="top-header__gradient">
         <div className="top-header">
           <div className="top-header__icon-wrapper">
-            <Link to={"/setting"}>
+            <Link onClick={() => dispatch(pauseAudio(true))} to={"/setting"}>
               <svg width="38" height="41" viewBox="0 0 30 30" className="svg">
                 <g
                   fill="none"
@@ -41,12 +44,15 @@ const Header = () => {
           </div>
           <div className="top-header-desc">
             <div className="top-header-desc__text">
-              <h3>
-                سوره الرحمن<span>1آیه</span>
-              </h3>
-              <p>صفحه 2</p>
+              <h3>قرآن</h3>
             </div>
-            <div onClick={() => navigate(-1)} className="back__wrapper">
+            <div
+              onClick={() => {
+                dispatch(pauseAudio(true));
+                navigate(-1);
+              }}
+              className="back__wrapper"
+            >
               <img className="back__img" src={backImg} alt="back" />
             </div>
           </div>

@@ -15,6 +15,8 @@ function App() {
             <Route path=":surahNumberSearch" element={<AllQuranPages />} />
           </Route>
           <Route path="*" element={<Main />} />
+          <Route path="/Main" element={<Main />} />
+
           <Route path="/search" element={<Search />} />
           <Route path="/setting" element={<Setting />} />
         </Routes>

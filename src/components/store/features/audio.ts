@@ -1,22 +1,96 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import { QuranDataSura } from "../../../datas/quran-metadata";
 
 interface audioInitTypes {
-  audioSrc: string;
+  ayehNumberNew: string;
+  surahNumberNew: string;
+  playAudioPage: boolean;
+  isPauesed: boolean;
+  audioProgress: number;
+
+  audioGenerator: () => string;
 }
+
+interface audioPlayActionTypes {
+  ayehNumberNew: string;
+  surahNumberNew: string;
+}
+
+const ayehFormatGenerator = (number: number) => {
+  let result = "0";
+  let numberLenght = number.toString().length;
+  if (numberLenght === 3) {
+    result = `${number}`;
+  } else if (numberLenght === 2) {
+    result = `0${number}`;
+  } else if (numberLenght === 1) {
+    result = `00${number}`;
+  }
+  return result;
+};
+
 const audioInitial: audioInitTypes = {
-  audioSrc: "",
+  playAudioPage: false,
+  ayehNumberNew: "001",
+  surahNumberNew: "001",
+  isPauesed: false,
+  audioProgress: 0,
+
+  audioGenerator() {
+    return `http://www.everyayah.com/data/Hudhaify_32kbps/${this.surahNumberNew}${this.ayehNumberNew}.mp3`;
+  },
 };
 const audioSlice = createSlice({
   name: "audioSlice",
   initialState: audioInitial,
   reducers: {
-    playAudio(state, action: PayloadAction<string>) {
-      state.audioSrc = action.payload;
+    playAudio(state, action: PayloadAction<audioPlayActionTypes>) {
+      if (
+        +QuranDataSura[+action.payload.surahNumberNew - 1][0] ===
+        +action.payload.ayehNumberNew
+      ) {
+        state.ayehNumberNew = "001";
+        state.surahNumberNew = ayehFormatGenerator(
+          +action.payload.surahNumberNew
+        );
+      } else {
+        state.ayehNumberNew = ayehFormatGenerator(
+          +action.payload.ayehNumberNew
+        );
+        state.surahNumberNew = ayehFormatGenerator(
+          +action.payload.surahNumberNew
+        );
+      }
     },
-    changeGhari() {},
+    playNextAudio(state) {
+      const surahNumberIndex = +state.surahNumberNew - 1;
+      const totalAyehNumber =
+        +QuranDataSura[surahNumberIndex][1] +
+        +QuranDataSura[surahNumberIndex][0] -
+        +QuranDataSura[surahNumberIndex][0];
+      if (+state.ayehNumberNew < totalAyehNumber) {
+        state.ayehNumberNew = ayehFormatGenerator(+state.ayehNumberNew + 1);
+      } else if (+state.surahNumberNew + 1 !== 115) {
+        state.ayehNumberNew = "001";
+        state.surahNumberNew = ayehFormatGenerator(+state.surahNumberNew + 1);
+      }
+    },
+    playAudioPage(state, action: PayloadAction<number>) {},
+    pauseAudio(state, action: PayloadAction<boolean>) {
+      state.isPauesed = action.payload;
+    },
+    audioProgressHandler(state, action: PayloadAction<number>) {
+      state.audioProgress = action.payload;
+    },
   },
 });
 
-export const { playAudio, changeGhari } = audioSlice.actions;
+export const {
+  playAudio,
+  playNextAudio,
+  playAudioPage,
+  pauseAudio,
+  audioProgressHandler,
+} = audioSlice.actions;
 
 export default audioSlice.reducer;

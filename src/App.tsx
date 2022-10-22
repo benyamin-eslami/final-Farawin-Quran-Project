@@ -5,8 +5,14 @@ import Search from "./components/Search";
 import { Routes, Route, Link } from "react-router-dom";
 import Setting from "./components/Setting";
 import Layout from "./components/Layout/Layout";
+import { useAppDispatch } from "./components/store/store";
+import { ghariAudioChangeHandler } from "./components/store/features/audio";
 
 function App() {
+  // const dispatch = useAppDispatch();
+  // const ghariName = localStorage.getItem("ghari");
+  // ghariName && dispatch(ghariAudioChangeHandler(ghariName));
+
   return (
     <>
       <Layout>

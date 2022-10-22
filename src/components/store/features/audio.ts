@@ -4,6 +4,8 @@ import { QuranDataSura } from "../../../datas/quran-metadata";
 interface audioInitTypes {
   ayehNumberNew: string;
   surahNumberNew: string;
+  ghariName: string;
+
   playAudioPage: boolean;
   isPauesed: boolean;
   audioProgress: number;
@@ -31,13 +33,14 @@ const ayehFormatGenerator = (number: number) => {
 
 const audioInitial: audioInitTypes = {
   playAudioPage: false,
-  ayehNumberNew: "001",
-  surahNumberNew: "001",
+  ayehNumberNew: "",
+  surahNumberNew: "",
+  ghariName: "Menshawi_16kbps",
   isPauesed: false,
   audioProgress: 0,
 
   audioGenerator() {
-    return `http://www.everyayah.com/data/Hudhaify_32kbps/${this.surahNumberNew}${this.ayehNumberNew}.mp3`;
+    return `http://www.everyayah.com/data/${this.ghariName}/${this.surahNumberNew}${this.ayehNumberNew}.mp3`;
   },
 };
 const audioSlice = createSlice({
@@ -82,6 +85,9 @@ const audioSlice = createSlice({
     audioProgressHandler(state, action: PayloadAction<number>) {
       state.audioProgress = action.payload;
     },
+    ghariAudioChangeHandler(state, action: PayloadAction<string>) {
+      state.ghariName = action.payload;
+    },
   },
 });
 
@@ -91,6 +97,7 @@ export const {
   playAudioPage,
   pauseAudio,
   audioProgressHandler,
+  ghariAudioChangeHandler,
 } = audioSlice.actions;
 
 export default audioSlice.reducer;

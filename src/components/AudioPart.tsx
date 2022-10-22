@@ -30,8 +30,6 @@ const AudioPart = () => {
   const dispatch = useAppDispatch();
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  console.log(isPauesed);
-
   isPauesed && audioRef.current?.pause();
 
   const playPauseHandler = () => {

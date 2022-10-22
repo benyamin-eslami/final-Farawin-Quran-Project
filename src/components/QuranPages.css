@@ -79,7 +79,7 @@ li {
   background-image: url("../assets/img/nasim-rezvan-bg-pattern.18658f7.png");
 }
 .inner-search-wrapper {
-  margin: 0 3rem;
+  margin: 0 1%;
 }
 
 nav {
@@ -250,14 +250,14 @@ nav ul {
   padding: 1rem 0.5rem;
 
   position: fixed;
-  left: 14rem;
+  left: 0vw;
   top: 50vh;
 }
 .next-arrow__wrapper {
   padding: 1rem 0.5rem;
 
   position: fixed;
-  right: 14rem;
+  right: 0vw;
   top: 50vh;
 }
 .prev-arrow__wrapper:hover,

@@ -1,12 +1,13 @@
 import "./QuranPages.css";
-import QuranTraslateFarsi from "./QuranTranslate";
+import QuranTraslateFarsi from "./QuranTraslateFarsi";
 import { v4 as uuidv4 } from "uuid";
-import { memo, useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { quranTextEmla } from "../datas/QuranTextEmla";
 import { QuranDataSura } from "../datas/quran-metadata";
 import { EmailShareButton } from "react-share";
-import { useAppDispatch } from "./store/store";
-import { pauseAudio, playAudio } from "./store/features/audio";
+import { selectIsPageStartPlaying, useAppDispatch } from "./store/store";
+import { pauseAudio, playAudio, playAudioPage } from "./store/features/audio";
+import { useSelector } from "react-redux";
 
 interface QuranAyehPropsTypes {
   ayeh: string;
@@ -27,6 +28,8 @@ const QuranAyeh = ({
 }: QuranAyehPropsTypes) => {
   const dispatch = useAppDispatch();
   const [isCopied, setIsCopied] = useState<boolean>(false);
+  const spanRef = useRef<HTMLSpanElement>(null);
+  const isPageStartPlaying = useSelector(selectIsPageStartPlaying);
 
   let ayehIndex =
     quranTextEmla.findIndex((ayehT, i, arr) => {
@@ -43,7 +46,6 @@ const QuranAyeh = ({
     let start = data[0];
     let end = data[1] + data[0];
     let newcounter: number = -1;
-    let firstFound: number = 0;
 
     for (let i = start; i <= end; i++) {
       newcounter++;
@@ -54,6 +56,23 @@ const QuranAyeh = ({
       }
     }
   });
+  console.log(surahNumberCheck);
+
+  useEffect(() => {
+    let firstPageAyeh = "0";
+    if (+spanRef.current!.id === 0) {
+      firstPageAyeh = spanRef.current!.innerHTML;
+      console.log(firstPageAyeh);
+      isPageStartPlaying &&
+        dispatch(
+          playAudio({
+            surahNumberNew: (surahNumberCheck + 1).toString(),
+            ayehNumberNew: firstPageAyeh,
+          })
+        ) &&
+        dispatch(playAudioPage(false));
+    }
+  }, []);
 
   const audioHandler = () => {
     let surahNumberNew = (surahNumberCheck + 1).toString();
@@ -68,7 +87,13 @@ const QuranAyeh = ({
         <div className="search__result">
           <div className="search__result-icons">
             <div className="aye__container">
-              <span className="aye__number">{ayehOrder}</span>
+              <span
+                ref={spanRef}
+                id={`${ayehIndexSpliced}`}
+                className="aye__number"
+              >
+                {ayehOrder}
+              </span>
               <svg
                 fill="none"
                 width="40"
@@ -97,11 +122,12 @@ const QuranAyeh = ({
             <div className="action-section">
               <svg
                 onClick={() => {
-                  navigator.clipboard.writeText(ayeh);
-                  setIsCopied(true);
-                  setTimeout(() => {
-                    setIsCopied(false);
-                  }, 1500);
+                  navigator.clipboard.writeText(ayeh).then(() => {
+                    setIsCopied(true);
+                    setTimeout(() => {
+                      setIsCopied(false);
+                    }, 1500);
+                  });
                 }}
                 width="25"
                 height="30"

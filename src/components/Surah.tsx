@@ -28,8 +28,6 @@ const Surah = ({ search }: { search: string }) => {
             onClick={() => {
               const surahStartPage = surahPages[surah.number - 1];
               navigate(`/pages/${surahStartPage}/${surah.number}`);
-              console.log(QuranDataSura[surah.number - 1][0].toString());
-              console.log(surah.number.toString());
 
               dispatch(
                 playAudio({
@@ -54,16 +52,6 @@ const Surah = ({ search }: { search: string }) => {
                   stroke-linejoin="round"
                   stroke-width="3"
                   d="M2.475 21V2l16 9.5-16 9.5z"
-                />
-              </svg>
-              <svg height="20" width="20" viewBox="0 0 48 48" className="svg">
-                <path
-                  d="M24 4.979l6.18 12.523L44 19.51l-10 9.747 2.361 13.764L24 36.523l-12.361 6.498L14 29.257 4 19.51l13.82-2.008L24 4.979z"
-                  stroke-linecap="round"
-                  stroke-width="4"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linejoin="round"
                 />
               </svg>
             </div>

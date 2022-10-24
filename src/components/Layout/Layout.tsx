@@ -1,15 +1,23 @@
 import { ReactNode } from "react";
-import AudioPart from "../AudioPart";
-import Header from "./Header";
 import Navigation from "./Navigation";
+import Header from "./Header";
+import styles from "./container.module.css";
+import { useLocation } from "react-router-dom";
+import AudioPart from "../AudioPart";
 const Layout = ({ children }: { children: ReactNode }) => {
+  const location = useLocation();
   return (
     <>
-      <div className="container">
+      <div className={styles["container"]}>
         <Header />
         {children}
-        <AudioPart />
-        {/* <Navigation /> */}
+        {location.pathname === "/setting" ||
+        location.pathname === "/search" ||
+        location.pathname === "/main" ? (
+          <Navigation />
+        ) : (
+          <AudioPart />
+        )}
       </div>
     </>
   );

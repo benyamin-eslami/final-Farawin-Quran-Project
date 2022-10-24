@@ -1,6 +1,5 @@
 import { pageSplitNumberArray } from "../datas/alllQuranPagesLogic";
 import { useNavigate } from "react-router-dom";
-import { surahPages } from "../datas/alllQuranPagesLogic";
 import { useDispatch } from "react-redux";
 import { playAudioPage } from "./store/features/audio";
 import "./Search.css";
@@ -13,7 +12,7 @@ const Safhe = ({ search, notFound }: SafhePropsTypes) => {
   const navigate = useNavigate();
   const showPageContent = () => {
     navigate(`/pages/${search}`);
-    dispatch(playAudioPage(+search));
+    dispatch(playAudioPage(true));
   };
   return (
     <>

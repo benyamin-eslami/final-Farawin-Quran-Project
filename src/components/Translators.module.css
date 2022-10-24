@@ -1,20 +1,6 @@
-ul {
-  margin: 0;
-  padding: 0;
-}
-a {
-  text-decoration: none;
-}
-li {
-  list-style-type: none;
-}
-
-.rtl {
-  direction: rtl;
-}
-
 .translate__sec {
   direction: rtl;
+  border-radius: 0.3rem;
   background-color: white;
   padding: 1rem;
 }
@@ -54,7 +40,7 @@ li {
   border-radius: 0.2rem;
   margin: 1rem;
 }
-.close__btn {
+.close__btn-red {
   border: none;
   background-color: red;
   color: #fff;
@@ -62,6 +48,6 @@ li {
   border-radius: 0.3rem;
   cursor: pointer;
 }
-.close__btn:hover {
+.close__btn-red:hover {
   background-color: rgb(255, 79, 79);
 }

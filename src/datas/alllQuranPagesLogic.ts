@@ -74,3 +74,31 @@ export const surahPages = [
   596, 596, 597, 597, 598, 598, 599, 599, 600, 600, 601, 601, 601, 602, 602,
   602, 603, 603, 603, 604, 604, 604,
 ];
+/////////////////////////////
+
+//  quranTextEmlaSliced.map((ayeh: string, i: number, arr) => {
+
+// let ayehIndex = quranTextEmla.findIndex((ayehT, i, arr) => {
+//     return ayeh === ayehT && arr[i + 1] === arr[i + 1]
+//       ? ayeh === ayehT && arr[i + 1] === arr[i + 1]
+//       : ayeh === ayehT && arr[i - 1] === arr[i - 1];
+//   }) + 1;
+
+// //number of ayeh  for current surah
+// let ayehOrder = 0;
+
+// //calculate surahnumber based on what page we are in
+// let surahNumberCheck = QuranDataSura.findIndex((data: any, index) => {
+//   let start = data[0];
+//   let end = data[1] + data[0];
+//   let newcounter: number = -1;
+
+//   for (let i = start; i <= end; i++) {
+//     newcounter++;
+//     if (ayehIndex === i) {
+//       ayehOrder = newcounter;
+
+//       return index + 1;
+//     }
+//   }
+// }))}

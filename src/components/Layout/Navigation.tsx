@@ -1,18 +1,33 @@
 import homeImg from "../../assets/img/haram2.7b1ffc7.png";
 import { Link } from "react-router-dom";
+import openBook from "../../assets/img/openbook.png";
+import styles from "./navigation.module.css";
 
 const Navigation = () => {
   return (
-    <section className="nav__wrapper">
+    <section>
       <nav>
         <ul>
-          <li className="menu-list"></li>
+          <Link to="/search">
+            <li className={styles["menu-list"]}>
+              <img
+                className={styles["openbookImg"]}
+                src={openBook}
+                alt="search"
+              />
+            </li>
+          </Link>
           <Link to={"/setting"}>
-            <li className="menu-list">
-              <svg width="30" height="30" viewBox="0 0 30 30" className="svg">
+            <li className={styles["menu-list"]}>
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                className={styles["svg"]}
+              >
                 <g
                   fill="none"
-                  stroke="gray"
+                  stroke="#000"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
@@ -23,8 +38,11 @@ const Navigation = () => {
               </svg>
             </li>
           </Link>
-          <div className="home-nav">
-            <img className="haram-img" src={homeImg} alt="home" />
+
+          <div className={styles["home-nav"]}>
+            <Link to="/main">
+              <img className={styles["haram-img"]} src={homeImg} alt="home" />
+            </Link>
           </div>
         </ul>
       </nav>

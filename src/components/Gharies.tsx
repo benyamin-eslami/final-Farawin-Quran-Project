@@ -1,10 +1,17 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import makaremImg from "../assets/img/translator-makarem.17a2064.png";
+import basfar from "../assets/img/basfar.jpg";
+import menshavi from "../assets/img/menshavi.png";
 import styles from "./Gharies.module.css";
 import { ghariAudioChangeHandler } from "./store/features/audio";
 import { useAppDispatch } from "./store/store";
 
-const Gharies = () => {
+const Gharies = ({
+  closeGhariHandler,
+  isShowGhariPart,
+}: {
+  closeGhariHandler?: (isClose: boolean) => void;
+  isShowGhariPart?: boolean;
+}) => {
   const [ghariName, setGhariName] = useState<any>(
     localStorage.getItem("ghari")
       ? localStorage.getItem("ghari")
@@ -22,37 +29,56 @@ const Gharies = () => {
       dispatch(ghariAudioChangeHandler(event.target.value));
     }
   };
-
+  const [isClose, setIsClose] = useState<boolean>(false);
+  closeGhariHandler && closeGhariHandler(isClose);
   return (
     <div className={styles["translate__sec"]}>
-      <label className={styles["translate-label"]} htmlFor="menshavi">
-        <input
-          onChange={ghariChangeHandler}
-          name="ghari"
-          id="Menshawi"
-          type="radio"
-          value="Menshawi_16kbps"
-          checked={ghariName === "Menshawi_16kbps"}
-        />
-        <div className={styles["translate-info__sec"]}>
-          <p>منشاوی</p>
-          <img src={makaremImg} alt="fooladvand" />
+      {isShowGhariPart && (
+        <div>
+          <button
+            className={styles["close__btn"]}
+            onClick={() => setIsClose(true)}
+          >
+            بستن
+          </button>
         </div>
-      </label>
-      <label className={styles["translate-label"]} htmlFor="khalilolhosra">
-        <input
-          onChange={ghariChangeHandler}
-          name="ghari"
-          id="Abdullah_Basfar"
-          type="radio"
-          value="Husary_64kbps"
-          checked={ghariName === "Husary_64kbps"}
-        />
-        <div className={styles["translate-info__sec"]}>
-          <p>خلیل الحصری</p>
-          <img src={makaremImg} alt="makarem" />
-        </div>
-      </label>
+      )}
+
+      <div>
+        <p> انتخاب قاری</p>
+
+        <label className={styles["translate-label"]} htmlFor="menshavi">
+          <input
+            onChange={ghariChangeHandler}
+            name="ghari"
+            id="menshavi"
+            type="radio"
+            value="Menshawi_16kbps"
+            checked={ghariName === "Menshawi_16kbps"}
+          />
+          <div className={styles["translate-info__sec"]}>
+            <p>منشاوی</p>
+            <img src={menshavi} alt="fooladvand" />
+          </div>
+        </label>
+        <label
+          className={styles["translate-label"]}
+          htmlFor="Abdullah_Basfar_32kbps"
+        >
+          <input
+            onChange={ghariChangeHandler}
+            name="ghari"
+            id="Abdullah_Basfar_32kbps"
+            type="radio"
+            value="Abdullah_Basfar_32kbps"
+            checked={ghariName === "Abdullah_Basfar_32kbps"}
+          />
+          <div className={styles["translate-info__sec"]}>
+            <p>عبد الله بن علي بصفر</p>
+            <img src={basfar} alt="makarem" />
+          </div>
+        </label>
+      </div>
     </div>
   );
 };

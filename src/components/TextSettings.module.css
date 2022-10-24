@@ -1,22 +1,7 @@
-ul {
-  margin: 0;
-  padding: 0;
-}
-a {
-  text-decoration: none;
-}
-li {
-  list-style-type: none;
-}
-
-.rtl {
-  direction: rtl;
-}
-
 .translate__sec {
   direction: rtl;
+  border-radius: 0.3rem;
   background-color: white;
-  padding: 1rem;
 }
 .translate-label {
   display: flex;
@@ -43,10 +28,9 @@ li {
 
 .translate__option-title {
   text-align: center;
-  padding: 1rem;
 }
 .translate__text-setting {
-  padding: 1rem 3rem;
+  padding: 1rem 1rem 1.8rem 1rem;
 }
 .examole__translate {
   background-color: rgb(238, 237, 237);

@@ -1,9 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import audioReducer from "./features/audio";
+import settingReducer from "./features/setting";
 import { useDispatch } from "react-redux";
 
 export const store = configureStore({
-  reducer: { audio: audioReducer },
+  reducer: { audio: audioReducer, setting: settingReducer },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 type RootState = ReturnType<typeof store.getState>;
@@ -16,3 +21,9 @@ export const selectIsPlayAudioPage = (state: RootState) =>
 export const selectIsIsPauesed = (state: RootState) => state.audio.isPauesed;
 export const selectAudioProgress = (state: RootState) =>
   state.audio.audioProgress;
+export const selectGhariName = (state: RootState) => state.audio.ghariName;
+export const selectIsPageStartPlaying = (state: RootState) =>
+  state.audio.isPageStartPlaying;
+export const selectTranslator = (state: RootState) => state.setting.translator;
+export const selectFontFamily = (state: RootState) => state.setting.fontFamily;
+export const selectFontSize = (state: RootState) => state.setting.fontSize;

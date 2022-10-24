@@ -1,20 +1,49 @@
 import backImg from "../../assets/img/back.svg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import styles from "./header.module.css";
 import { Link } from "react-router-dom";
-import "../QuranPages.css";
 import { pauseAudio } from "../store/features/audio";
 import { useAppDispatch } from "../store/store";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [mytitle, setTitle] = useState<string>("اپلیکیشن قرآنی فراوین");
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case "/main":
+        setTitle("اپلیکیشن قرآنی فراوین");
+        break;
+      case "/search":
+        setTitle("جستجو در قرآن");
+        break;
+      case "/setting":
+        setTitle("تنظیمات");
+        break;
+
+      default:
+        setTitle("اپلیکیشن قرآنی فراوین");
+
+        break;
+    }
+  }, [location.pathname]);
+
   return (
-    <div className="top__header-wrappper">
-      <div className="top-header__gradient">
-        <div className="top-header">
-          <div className="top-header__icon-wrapper">
+    <div className={styles["top__header-wrappper"]}>
+      <div className={styles["top-header__gradient"]}>
+        <div className={styles["top-header"]}>
+          <div className={styles["top-header__icon-wrapper"]}>
             <Link onClick={() => dispatch(pauseAudio(true))} to={"/setting"}>
-              <svg width="38" height="41" viewBox="0 0 30 30" className="svg">
+              <svg
+                width="38"
+                height="41"
+                viewBox="0 0 30 30"
+                className={styles["svg"]}
+              >
                 <g
                   fill="none"
                   stroke="white"
@@ -27,33 +56,18 @@ const Header = () => {
                 </g>
               </svg>
             </Link>
-            <svg width="38" height="41" viewBox="0 0 29 29" className="svg">
-              <g
-                stroke="currentColor"
-                strokeMiterlimit="10"
-                strokeWidth="2"
-                fill="none"
-              >
-                <path
-                  strokeLinecap="square"
-                  d="M24 23l-4.5-4.5M12 19a8 8 0 100-16 8 8 0 000 16z"
-                />
-                <path d="M7 11a5 5 0 015-5" />
-              </g>
-            </svg>
           </div>
-          <div className="top-header-desc">
-            <div className="top-header-desc__text">
-              <h3>قرآن</h3>
+          <div className={styles["top-header-desc"]}>
+            <div className={styles["top-header-desc__text"]}>
+              <h3>{mytitle}</h3>
             </div>
             <div
               onClick={() => {
                 dispatch(pauseAudio(true));
                 navigate(-1);
               }}
-              className="back__wrapper"
             >
-              <img className="back__img" src={backImg} alt="back" />
+              <img className={styles["back__img"]} src={backImg} alt="back" />
             </div>
           </div>
         </div>

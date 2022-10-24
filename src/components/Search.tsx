@@ -99,9 +99,6 @@ const Search = () => {
             <div className="filter__wrapper">
               <ul className="filter__list-container">
                 <li className="filter__list">
-                  <button>منتخب</button>
-                </li>
-                <li className="filter__list">
                   <button
                     onClick={() => {
                       setSearchState("صفحه");

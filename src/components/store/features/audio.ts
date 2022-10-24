@@ -5,6 +5,7 @@ interface audioInitTypes {
   ayehNumberNew: string;
   surahNumberNew: string;
   ghariName: string;
+  isPageStartPlaying: boolean;
 
   playAudioPage: boolean;
   isPauesed: boolean;
@@ -35,6 +36,8 @@ const audioInitial: audioInitTypes = {
   playAudioPage: false,
   ayehNumberNew: "",
   surahNumberNew: "",
+  isPageStartPlaying: false,
+
   ghariName: "Menshawi_16kbps",
   isPauesed: false,
   audioProgress: 0,
@@ -78,7 +81,9 @@ const audioSlice = createSlice({
         state.surahNumberNew = ayehFormatGenerator(+state.surahNumberNew + 1);
       }
     },
-    playAudioPage(state, action: PayloadAction<number>) {},
+    playAudioPage(state, action: PayloadAction<boolean>) {
+      state.isPageStartPlaying = action.payload;
+    },
     pauseAudio(state, action: PayloadAction<boolean>) {
       state.isPauesed = action.payload;
     },

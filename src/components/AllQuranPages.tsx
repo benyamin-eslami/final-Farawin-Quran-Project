@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import { pageSplitNumberArray } from "../datas/alllQuranPagesLogic";
 import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
+import AudioPart from "./AudioPart";
 
 const AllQuranPages = () => {
   let surahRefs = useRef<HTMLDivElement[]>([]);
@@ -132,6 +133,7 @@ const AllQuranPages = () => {
           </ul>
         </div>
       </section>
+      {/* <AudioPart /> */}
     </>
   );
 };

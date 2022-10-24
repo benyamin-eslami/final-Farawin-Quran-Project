@@ -212,6 +212,9 @@ nav ul {
 .notfound {
   text-align: center;
 }
+.result__list-right__safhe {
+  display: flex;
+}
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

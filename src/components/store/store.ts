@@ -24,6 +24,9 @@ export const selectAudioProgress = (state: RootState) =>
 export const selectGhariName = (state: RootState) => state.audio.ghariName;
 export const selectIsPageStartPlaying = (state: RootState) =>
   state.audio.isPageStartPlaying;
+export const selectSurahAyehStringGenerator = (state: RootState) =>
+  state.audio.surahAyehStringGenerator();
+
 export const selectTranslator = (state: RootState) => state.setting.translator;
 export const selectFontFamily = (state: RootState) => state.setting.fontFamily;
 export const selectFontSize = (state: RootState) => state.setting.fontSize;

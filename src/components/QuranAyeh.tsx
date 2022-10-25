@@ -5,7 +5,11 @@ import { memo, useEffect, useRef, useState } from "react";
 import { quranTextEmla } from "../datas/QuranTextEmla";
 import { QuranDataSura } from "../datas/quran-metadata";
 import { EmailShareButton } from "react-share";
-import { selectIsPageStartPlaying, useAppDispatch } from "./store/store";
+import {
+  selectIsPageStartPlaying,
+  selectSurahAyehStringGenerator,
+  useAppDispatch,
+} from "./store/store";
 import { pauseAudio, playAudio, playAudioPage } from "./store/features/audio";
 import { useSelector } from "react-redux";
 
@@ -27,9 +31,24 @@ const QuranAyeh = ({
   pageIndex,
 }: QuranAyehPropsTypes) => {
   const dispatch = useAppDispatch();
+  const surahAyehString = useSelector(selectSurahAyehStringGenerator);
+  const isPageStartPlaying = useSelector(selectIsPageStartPlaying);
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const spanRef = useRef<HTMLSpanElement>(null);
-  const isPageStartPlaying = useSelector(selectIsPageStartPlaying);
+  const listAyehElementRef = useRef<HTMLLIElement>(null);
+
+  const ayehFormatGenerator = (number: number) => {
+    let result = "";
+    let numberLenght = number.toString().length;
+    if (numberLenght === 3) {
+      result = `${number}`;
+    } else if (numberLenght === 2) {
+      result = `0${number}`;
+    } else if (numberLenght === 1) {
+      result = `00${number}`;
+    }
+    return result;
+  };
 
   let ayehIndex =
     quranTextEmla.findIndex((ayehT, i, arr) => {
@@ -51,18 +70,15 @@ const QuranAyeh = ({
       newcounter++;
       if (ayehIndex === i) {
         ayehOrder = newcounter;
-
         return index + 1;
       }
     }
   });
-  console.log(surahNumberCheck);
 
   useEffect(() => {
     let firstPageAyeh = "0";
     if (+spanRef.current!.id === 0) {
       firstPageAyeh = spanRef.current!.innerHTML;
-      console.log(firstPageAyeh);
       isPageStartPlaying &&
         dispatch(
           playAudio({
@@ -74,6 +90,22 @@ const QuranAyeh = ({
     }
   }, []);
 
+  useEffect(() => {
+    const ayehInnerHtml = spanRef.current!.innerHTML;
+    const finalString = `${ayehFormatGenerator(
+      surahNumberCheck + 1
+    )}${ayehFormatGenerator(+ayehInnerHtml)}`;
+
+    if (finalString === surahAyehString) {
+      listAyehElementRef.current!.previousElementSibling?.classList.remove(
+        "highlight"
+      );
+      listAyehElementRef.current!.classList.add("highlight");
+    } else {
+      listAyehElementRef.current!.classList.remove("highlight");
+    }
+  }, [surahAyehString]);
+
   const audioHandler = () => {
     let surahNumberNew = (surahNumberCheck + 1).toString();
     let ayehNumberNew = ayehOrder.toString();
@@ -83,7 +115,11 @@ const QuranAyeh = ({
 
   return (
     <>
-      <li onClick={audioHandler} className="search__result-list">
+      <li
+        ref={listAyehElementRef}
+        onClick={audioHandler}
+        className="search__result-list"
+      >
         <div className="search__result">
           <div className="search__result-icons">
             <div className="aye__container">

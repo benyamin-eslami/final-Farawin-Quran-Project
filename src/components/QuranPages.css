@@ -131,10 +131,15 @@ nav ul {
 }
 
 .search__result-list {
+  padding: 0.6rem 0.8rem;
   text-align: right;
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+.search__result-list:hover {
+  background-color: rgba(201, 245, 232, 0.534);
 }
 .search__result {
   display: flex;
@@ -238,4 +243,7 @@ nav ul {
 .prev-arrow__wrapper:active,
 .next-arrow__wrapper:active {
   background-color: rgba(148, 145, 145, 0.281);
+}
+.highlight {
+  background-color: rgba(160, 240, 216, 0.363);
 }

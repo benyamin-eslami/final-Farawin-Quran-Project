@@ -11,6 +11,8 @@ interface audioInitTypes {
   isPauesed: boolean;
   audioProgress: number;
 
+  surahAyehStringGenerator: () => string;
+
   audioGenerator: () => string;
 }
 
@@ -41,6 +43,10 @@ const audioInitial: audioInitTypes = {
   ghariName: "Menshawi_16kbps",
   isPauesed: false,
   audioProgress: 0,
+
+  surahAyehStringGenerator() {
+    return `${this.surahNumberNew}${this.ayehNumberNew}`;
+  },
 
   audioGenerator() {
     return `http://www.everyayah.com/data/${this.ghariName}/${this.surahNumberNew}${this.ayehNumberNew}.mp3`;

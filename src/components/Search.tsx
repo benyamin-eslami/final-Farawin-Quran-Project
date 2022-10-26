@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Safhe from "./Safhe";
 import Surah from "./Surah";
-import "./Search.css";
+import styles from "./search.module.css";
 
 const Search = () => {
   const [search, setSearch] = useState<string>("");
@@ -30,10 +30,10 @@ const Search = () => {
 
   return (
     <>
-      <div className="container">
-        <section className="search-wrapper">
-          <div className="shrine__pattern">
-            <svg fill="none" viewBox="0 0 414 140" className="svg">
+      <div className={styles["container"]}>
+        <section className={styles["search-wrapper"]}>
+          <div className={styles["shrine__pattern"]}>
+            <svg fill="none" viewBox="0 0 414 140" className={styles["svg"]}>
               <path
                 fill="url(#a)"
                 d="M418 123.304c-8.916-55.1-65.369-53.544-71.534-53.374h-.002c-.217.006-.371.01-.459.01l-3.322.368v-3.312c0-6.992-2.216-12.145-6.277-16.193-11.568-11.171-38.711-10.345-62.713-9.615h-.001l-1.527.046c-3.421 0-6.646.098-9.776.192-2.951.09-5.818.176-8.685.176-25.475 0-39.504-16.561-46.15-27.602-6.277 11.04-20.675 27.602-46.15 27.602-5.908 0-12.184 0-18.461-.368-24.367-1.104-52.427-1.84-64.241 9.569-4.43 4.048-6.277 9.2-6.277 16.193v3.312l-3.322-.368-.1-.004c-1.97-.082-31.872-1.329-52.697 16.566C4.123 96.806-2.523 111.896-4 131.4v4.6h422v-12.696z"
@@ -95,10 +95,10 @@ const Search = () => {
               </defs>
             </svg>
           </div>
-          <section className="filter">
-            <div className="filter__wrapper">
-              <ul className="filter__list-container">
-                <li className="filter__list">
+          <section className={styles["filter"]}>
+            <div className={styles["filter__wrapper"]}>
+              <ul className={styles["filter__list-container"]}>
+                <li className={styles["filter__list"]}>
                   <button
                     onClick={() => {
                       setSearchState("صفحه");
@@ -108,7 +108,7 @@ const Search = () => {
                     صفحه
                   </button>
                 </li>
-                <li className="filter__list">
+                <li className={styles["filter__list"]}>
                   <button
                     onClick={() => {
                       setSearchState("سوره");
@@ -120,7 +120,7 @@ const Search = () => {
                 </li>
               </ul>
               <input
-                className="input__filter"
+                className={styles["input__filter"]}
                 placeholder={`${searchState} را تایپ کنید`}
                 value={search}
                 type={searchState === "سوره" ? "text" : "number"}

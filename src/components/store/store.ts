@@ -21,7 +21,6 @@ export const selectIsPlayAudioPage = (state: RootState) =>
 export const selectIsIsPauesed = (state: RootState) => state.audio.isPauesed;
 export const selectAudioProgress = (state: RootState) =>
   state.audio.audioProgress;
-export const selectGhariName = (state: RootState) => state.audio.ghariName;
 export const selectIsPageStartPlaying = (state: RootState) =>
   state.audio.isPageStartPlaying;
 export const selectSurahAyehStringGenerator = (state: RootState) =>

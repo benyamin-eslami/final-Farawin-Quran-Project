@@ -1,4 +1,4 @@
-import "./QuranPages.css";
+import style from "./QuranAyeh.module.css";
 import QuranTraslateFarsi from "./QuranTraslateFarsi";
 import { v4 as uuidv4 } from "uuid";
 import { memo, useEffect, useRef, useState } from "react";
@@ -37,6 +37,7 @@ const QuranAyeh = ({
   const spanRef = useRef<HTMLSpanElement>(null);
   const listAyehElementRef = useRef<HTMLLIElement>(null);
 
+  // generate audio format example 1 => 001
   const ayehFormatGenerator = (number: number) => {
     let result = "";
     let numberLenght = number.toString().length;
@@ -75,6 +76,8 @@ const QuranAyeh = ({
     }
   });
 
+  // identifing first ayeh of the page to play when we clicked on page number we want from search part
+
   useEffect(() => {
     let firstPageAyeh = "0";
     if (+spanRef.current!.id === 0) {
@@ -90,19 +93,16 @@ const QuranAyeh = ({
     }
   }, []);
 
+  //implementing highlited playing ayeh
   useEffect(() => {
     const ayehInnerHtml = spanRef.current!.innerHTML;
     const finalString = `${ayehFormatGenerator(
       surahNumberCheck + 1
     )}${ayehFormatGenerator(+ayehInnerHtml)}`;
-
     if (finalString === surahAyehString) {
-      listAyehElementRef.current!.previousElementSibling?.classList.remove(
-        "highlight"
-      );
-      listAyehElementRef.current!.classList.add("highlight");
+      listAyehElementRef.current!.classList.add(`${style["highlight"]}`);
     } else {
-      listAyehElementRef.current!.classList.remove("highlight");
+      listAyehElementRef.current!.classList.remove(`${style["highlight"]}`);
     }
   }, [surahAyehString]);
 
@@ -118,15 +118,15 @@ const QuranAyeh = ({
       <li
         ref={listAyehElementRef}
         onClick={audioHandler}
-        className="search__result-list"
+        className={style["search__result-list"]}
       >
-        <div className="search__result">
-          <div className="search__result-icons">
-            <div className="aye__container">
+        <div className={style["search__result"]}>
+          <div className={style["search__result-icons"]}>
+            <div className={style["aye__container"]}>
               <span
                 ref={spanRef}
                 id={`${ayehIndexSpliced}`}
-                className="aye__number"
+                className={style["aye__number"]}
               >
                 {ayehOrder}
               </span>
@@ -135,7 +135,7 @@ const QuranAyeh = ({
                 width="40"
                 height="40"
                 viewBox="0 0 152 152"
-                className="svg aye__svg"
+                className={`${style["svg"]} ${style["aye__svg"]}`}
               >
                 <path
                   fill="#fff"
@@ -155,7 +155,7 @@ const QuranAyeh = ({
                 />
               </svg>
             </div>
-            <div className="action-section">
+            <div className={style["action-section"]}>
               <svg
                 onClick={() => {
                   navigator.clipboard.writeText(ayeh).then(() => {
@@ -168,7 +168,7 @@ const QuranAyeh = ({
                 width="25"
                 height="30"
                 viewBox="0 0 30 24"
-                className="svg more-svg"
+                className={`${style["svg"]} ${style["more-svg"]}`}
               >
                 <path
                   fill="none"
@@ -193,7 +193,7 @@ const QuranAyeh = ({
                   width="40"
                   height="25"
                   viewBox="0 0 30 24"
-                  className="svg more-svg"
+                  className={`${style["svg"]} ${style["more-svg"]}`}
                 >
                   <path
                     fill="none"
@@ -207,8 +207,12 @@ const QuranAyeh = ({
               </EmailShareButton>
             </div>
           </div>
-          <div className="search__result-context">
-            <p className="quran__text quran__text-weight">{ayeh}</p>
+          <div className={style["search__result-context"]}>
+            <p
+              className={`${style["quran__text"]} ${style["quran__text-weight"]}`}
+            >
+              {ayeh}
+            </p>
             <QuranTraslateFarsi
               pageArr={pageArr}
               key={uuidv4()}
@@ -217,7 +221,7 @@ const QuranAyeh = ({
           </div>
         </div>
       </li>
-      {isCopied && <span className="copied">copied</span>}
+      {isCopied && <span className={style["copied"]}>copied</span>}
     </>
   );
 };

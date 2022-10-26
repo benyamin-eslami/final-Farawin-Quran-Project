@@ -15,14 +15,17 @@ const settingSlice = createSlice({
   name: "setting",
   initialState: settingInitialState,
   reducers: {
-    translatorTextChangor(state, action: PayloadAction<string>) {
-      state.translator = action.payload;
+    translatorTextChangor(state, action: PayloadAction<string | null>) {
+      state.translator = action.payload ? action.payload : "fooladvand";
     },
-    translateTextFontFamilyChangor(state, action: PayloadAction<string>) {
-      state.fontFamily = action.payload;
+    translateTextFontFamilyChangor(
+      state,
+      action: PayloadAction<string | null>
+    ) {
+      state.fontFamily = action.payload ? action.payload : "iranSans";
     },
-    translateTextFontSizeChangor(state, action: PayloadAction<string>) {
-      state.fontSize = action.payload;
+    translateTextFontSizeChangor(state, action: PayloadAction<string | null>) {
+      state.fontSize = action.payload ? action.payload : "average";
     },
   },
 });

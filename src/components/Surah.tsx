@@ -4,6 +4,7 @@ import { surahPages } from "../datas/alllQuranPagesLogic";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "./store/store";
 import { pauseAudio, playAudio } from "./store/features/audio";
+import styles from "./surah.module.css";
 
 const Surah = ({ search }: { search: string }) => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Surah = ({ search }: { search: string }) => {
       searchFilter.map((surah) => {
         return (
           <li
-            className="filter__result-container-list gray"
+            className={`${styles["filter__result-container-list"]} ${styles["gray"]}`}
             onClick={() => {
               const surahStartPage = surahPages[surah.number - 1];
               navigate(`/pages/${surahStartPage}/${surah.number}`);
@@ -38,12 +39,12 @@ const Surah = ({ search }: { search: string }) => {
               dispatch(pauseAudio(false));
             }}
           >
-            <div className="result__list-left">
+            <div className={styles["result__list-left"]}>
               <svg
                 height="17"
                 width="17"
                 viewBox="0 0 20 23"
-                className="svg play"
+                className={`${styles["svg"]} ${styles["play"]}`}
               >
                 <path
                   fill="none"
@@ -55,17 +56,17 @@ const Surah = ({ search }: { search: string }) => {
                 />
               </svg>
             </div>
-            <div className="result__list-right">
-              <p className="surah__title">{surah.surah[4]}</p>
+            <div className={styles["result__list-right"]}>
+              <p className={styles["surah__title"]}>{surah.surah[4]}</p>
 
-              <div className="aye__container">
-                <span className="aye__number">{surah.number}</span>
+              <div className={styles["aye__container"]}>
+                <span className={styles["aye__number"]}>{surah.number}</span>
                 <svg
                   fill="none"
                   width="40"
                   height="40"
                   viewBox="0 0 152 152"
-                  className="svg aye__svg"
+                  className={`${styles["svg"]} ${styles["aye__svg"]}`}
                 >
                   <path
                     fill="#fff"
@@ -90,12 +91,12 @@ const Surah = ({ search }: { search: string }) => {
         );
       })
     ) : (
-      <p className="notfound">سوره مورد نظر یافت نشد</p>
+      <p className={styles["notfound"]}>سوره مورد نظر یافت نشد</p>
     );
 
   return (
     <>
-      <ul className="filter__result-container">{content} </ul>
+      <ul className={styles["filter__result-container"]}>{content} </ul>
     </>
   );
 };

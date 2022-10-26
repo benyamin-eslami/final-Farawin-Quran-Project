@@ -9,42 +9,67 @@ import menshavi from "../assets/img/menshavi.png";
 import fooladvandImg from "../assets/img/translator-fooladvand.0c7065d.png";
 import makaremImg from "../assets/img/translator-makarem.17a2064.png";
 import upArrow from "../assets/img/up-arrow.png";
-import "./audioPart.css";
+import styles from "./audiopart.module.css";
 import Gharies from "./Gharies";
 import { useSelector } from "react-redux";
 import {
   selectAudioSrc,
-  selectGhariName,
   selectTranslator,
   useAppDispatch,
 } from "./store/store";
-import { SyntheticEvent, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
-  audioProgressHandler,
+  ghariAudioChangeHandler,
   pauseAudio,
   playNextAudio,
 } from "./store/features/audio";
 import { selectIsIsPauesed } from "./store/store";
 import Translators from "./Translators";
 import TextSettings from "./TextSettings";
+import {
+  translateTextFontFamilyChangor,
+  translateTextFontSizeChangor,
+  translatorTextChangor,
+} from "./store/features/setting";
 
 const AudioPart = () => {
+  const dispatch = useAppDispatch();
+
+  //get ghari aznd translator status in initial render
+  useEffect(() => {
+    const ghariNameStorage = localStorage.getItem("ghari")
+      ? localStorage.getItem("ghari")
+      : "Menshawi_16kbps";
+    dispatch(ghariAudioChangeHandler(ghariNameStorage));
+
+    const translatorNameStorage = localStorage.getItem("translator")
+      ? localStorage.getItem("translator")
+      : "fooladvand";
+
+    dispatch(translatorTextChangor(translatorNameStorage));
+
+    const fontNameStorage = localStorage.getItem("fontname")
+      ? localStorage.getItem("fontname")
+      : "iranSans";
+    dispatch(translateTextFontFamilyChangor(fontNameStorage));
+
+    const fontSizeStorage = localStorage.getItem("fontsize")
+      ? localStorage.getItem("fontsize")
+      : "average";
+
+    dispatch(translateTextFontSizeChangor(fontSizeStorage));
+  }, []);
+
   const [isShowTranslatorPart, setIsShowTranslatorPart] =
     useState<boolean>(false);
   const [isShowGhariPart, setIsShowGhariPart] = useState<boolean>(false);
   const [isShowTextSetting, setIsShowTextSetting] = useState<boolean>(false);
-
   const audioSrcSelect = useSelector(selectAudioSrc);
   const isPauesed = useSelector(selectIsIsPauesed);
-  const ghariSelected = useSelector(selectGhariName);
-  const translatorSelected = useSelector(selectTranslator);
-
-  const dispatch = useAppDispatch();
+  const translatorName = useSelector(selectTranslator);
   const audioRef = useRef<HTMLAudioElement>(null);
   const audioPartSection = useRef<HTMLElement>(null);
   const ShowAudioRef = useRef<HTMLLIElement>(null);
-
-  isPauesed && audioRef.current?.pause();
 
   const closeAudioPartHandler = () => {
     audioPartSection.current!.style.display = "none";
@@ -68,17 +93,9 @@ const AudioPart = () => {
     }
   };
 
-  const audioFinishedHandler = (e: SyntheticEvent<HTMLAudioElement>) => {
+  const audioFinishedHandler = () => {
     dispatch(playNextAudio());
   };
-
-  // dispatch(
-  //   audioProgressHandler(
-  //     ((audioRef.current?.currentTime ? audioRef.current!.currentTime : 0) /
-  //       (audioRef.current?.duration ? audioRef.current!.duration : 1)) *
-  //       100
-  //   )
-  // );
 
   const closeGhariHandler = (isClose: boolean) => {
     isClose && setIsShowGhariPart(false);
@@ -90,17 +107,23 @@ const AudioPart = () => {
     isClose && setIsShowTextSetting(false);
   };
 
+  !isPauesed && audioRef.current?.pause();
+
   return (
     <>
       <li
         ref={ShowAudioRef}
         onClick={showAudioPartHandler}
-        className="show__wrapper"
+        className={styles["show__wrapper"]}
       >
         <p>نمایش پنل مدیریت صوت</p>
-        <img src={upArrow} alt="show-audio-part" className="show-img" />
+        <img
+          src={upArrow}
+          alt="show-audio-part"
+          className={styles["show-img"]}
+        />
       </li>
-      <section ref={audioPartSection} className="nav__wrapper">
+      <section ref={audioPartSection} className={styles["nav__wrapper"]}>
         <audio
           onEnded={audioFinishedHandler}
           ref={audioRef}
@@ -108,8 +131,11 @@ const AudioPart = () => {
           src={audioSrcSelect}
         ></audio>
         <nav>
-          <li onClick={closeAudioPartHandler} className="close__wrapper">
-            <img className="close" src={close} alt="text-setting" />
+          <li
+            onClick={closeAudioPartHandler}
+            className={styles["close__wrapper"]}
+          >
+            <img className={styles["close"]} src={close} alt="text-setting" />
           </li>
           {isShowGhariPart && (
             <Gharies
@@ -132,47 +158,53 @@ const AudioPart = () => {
 
           <ul>
             <li
-              className="menu-list"
+              className={styles["menu-list"]}
               onClick={() => setIsShowTextSetting((prev: boolean) => !prev)}
             >
-              <img className="text-icon" src={textIcon} alt="text-setting" />
+              <img
+                className={styles["text-icon"]}
+                src={textIcon}
+                alt="text-setting"
+              />
             </li>
             <li
-              className="menu-list"
+              className={styles["menu-list"]}
               onClick={() => setIsShowTranslatorPart((prev: boolean) => !prev)}
             >
               <img
-                className="menu-list-img"
-                src={
-                  translatorSelected === "fooladvand"
-                    ? fooladvandImg
-                    : makaremImg
-                }
+                className={styles["menu-list-img"]}
+                src={translatorName === "makarem" ? makaremImg : fooladvandImg}
                 alt="home"
               />
             </li>
-            <li onClick={playPauseHandler} className="menu-list">
+            <li onClick={playPauseHandler} className={styles["menu-list"]}>
               <img
-                className="playImg"
+                className={styles["playImg"]}
                 src={isPauesed ? play : pause}
                 alt="play"
               />
             </li>
             <li
-              className="menu-list"
+              className={styles["menu-list"]}
               onClick={() => setIsShowGhariPart((prev: boolean) => !prev)}
             >
               <img
-                className="menu-list-img"
+                className={styles["menu-list-img"]}
                 src={
-                  ghariSelected === "Abdullah_Basfar_32kbps" ? basfar : menshavi
+                  localStorage.getItem("ghari") === "Abdullah_Basfar_32kbps"
+                    ? basfar
+                    : menshavi
                 }
                 alt="home"
               />
             </li>
             <Link to={"/Main"}>
-              <li className="menu-list">
-                <img className="menu-list-img" src={haram} alt="haram-home" />
+              <li className={styles["menu-list"]}>
+                <img
+                  className={styles["menu-list-img"]}
+                  src={haram}
+                  alt="haram-home"
+                />
               </li>
             </Link>
           </ul>

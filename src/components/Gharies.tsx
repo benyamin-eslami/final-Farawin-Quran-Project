@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import basfar from "../assets/img/basfar.jpg";
 import menshavi from "../assets/img/menshavi.png";
 import styles from "./Gharies.module.css";
@@ -18,9 +18,6 @@ const Gharies = ({
       : "Menshawi_16kbps"
   );
 
-  useEffect(() => {
-    dispatch(ghariAudioChangeHandler(ghariName));
-  }, []);
   const dispatch = useAppDispatch();
   const ghariChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -29,6 +26,7 @@ const Gharies = ({
       dispatch(ghariAudioChangeHandler(event.target.value));
     }
   };
+
   const [isClose, setIsClose] = useState<boolean>(false);
   closeGhariHandler && closeGhariHandler(isClose);
   return (

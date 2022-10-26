@@ -2,7 +2,7 @@ import { pageSplitNumberArray } from "../datas/alllQuranPagesLogic";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { playAudioPage } from "./store/features/audio";
-import "./Search.css";
+import style from "./safhe.module.css";
 interface SafhePropsTypes {
   search: any;
   notFound: any;
@@ -19,20 +19,20 @@ const Safhe = ({ search, notFound }: SafhePropsTypes) => {
       {pageSplitNumberArray.map((num: number, index: number) => {
         if (index + 1 === +search) {
           return (
-            <ul className="filter__result-container">
+            <ul className={style["filter__result-container"]}>
               {notFound ? (
-                <p className="notfound">{notFound}</p>
+                <p className={style["notfound"]}>{notFound}</p>
               ) : (
                 <li
                   onClick={showPageContent}
-                  className="filter__result-container-list gray "
+                  className={`${style["filter__result-container-list"]} ${style["gray"]}`}
                 >
-                  <div className="result__list-left">
+                  <div className={style["result__list-left"]}>
                     <svg
                       height="17"
                       width="17"
                       viewBox="0 0 20 23"
-                      className="svg play"
+                      className={`${style["svg"]} ${style["play"]}`}
                     >
                       <path
                         fill="none"
@@ -47,7 +47,7 @@ const Safhe = ({ search, notFound }: SafhePropsTypes) => {
                       height="20"
                       width="20"
                       viewBox="0 0 48 48"
-                      className="svg"
+                      className={style["svg"]}
                     >
                       <path
                         d="M24 4.979l6.18 12.523L44 19.51l-10 9.747 2.361 13.764L24 36.523l-12.361 6.498L14 29.257 4 19.51l13.82-2.008L24 4.979z"
@@ -59,17 +59,17 @@ const Safhe = ({ search, notFound }: SafhePropsTypes) => {
                       />
                     </svg>
                   </div>
-                  <div className="result__list-right">
-                    <p className="surah__title">صفحه</p>
+                  <div className={style["result__list-right"]}>
+                    <p className={style["surah__title"]}>صفحه</p>
 
-                    <div className="aye__container">
-                      <span className="aye__number">{search}</span>
+                    <div className={style["aye__container"]}>
+                      <span className={style["aye__number"]}>{search}</span>
                       <svg
                         fill="none"
                         width="40"
                         height="40"
                         viewBox="0 0 152 152"
-                        className="svg aye__svg"
+                        className={`${style["svg"]} ${style["aye__svg"]}`}
                       >
                         <path
                           fill="#fff"

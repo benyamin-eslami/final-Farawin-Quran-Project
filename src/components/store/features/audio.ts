@@ -1,4 +1,4 @@
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { QuranDataSura } from "../../../datas/quran-metadata";
 
 interface audioInitTypes {
@@ -6,7 +6,6 @@ interface audioInitTypes {
   surahNumberNew: string;
   ghariName: string;
   isPageStartPlaying: boolean;
-
   playAudioPage: boolean;
   isPauesed: boolean;
   audioProgress: number;
@@ -96,8 +95,8 @@ const audioSlice = createSlice({
     audioProgressHandler(state, action: PayloadAction<number>) {
       state.audioProgress = action.payload;
     },
-    ghariAudioChangeHandler(state, action: PayloadAction<string>) {
-      state.ghariName = action.payload;
+    ghariAudioChangeHandler(state, action: PayloadAction<string | null>) {
+      state.ghariName = action.payload ? action.payload : "Menshawi_16kbps";
     },
   },
 });

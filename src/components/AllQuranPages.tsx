@@ -1,7 +1,6 @@
-import "./QuranPages.css";
+import style from "./AllQuranPages.module.css";
 import nextPageImg from "../assets/img/next-pngrepo-com.png";
 import backPageImg from "../assets/img/back-pngrepo-com.png";
-
 import { QuranDataSura } from "../datas/quran-metadata";
 import { quranTextEmla } from "../datas/QuranTextEmla";
 import QuranAyeh from "./QuranAyeh";
@@ -9,7 +8,6 @@ import { v4 as uuidv4 } from "uuid";
 import { pageSplitNumberArray } from "../datas/alllQuranPagesLogic";
 import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import AudioPart from "./AudioPart";
 
 const AllQuranPages = () => {
   let surahRefs = useRef<HTMLDivElement[]>([]);
@@ -59,25 +57,31 @@ const AllQuranPages = () => {
 
   return (
     <>
-      <section className="search-wrapper">
-        <div className="inner-search-wrapper">
-          <div onClick={prevChangeHandler} className="prev-arrow__wrapper">
+      <section className={style["search-wrapper"]}>
+        <div className={style["inner-search-wrapper"]}>
+          <div
+            onClick={prevChangeHandler}
+            className={style["prev-arrow__wrapper"]}
+          >
             <img
-              className="arrow-img"
+              className={style["arrow-img"]}
               src={backPageImg}
               onClick={prevChangeHandler}
             />
           </div>
-          <div onClick={nextChangeHandler} className="next-arrow__wrapper">
+          <div
+            onClick={nextChangeHandler}
+            className={style["next-arrow__wrapper"]}
+          >
             <img
-              className="arrow-img"
+              className={style["arrow-img"]}
               src={nextPageImg}
               onClick={nextChangeHandler}
             />
           </div>
-          <ul key={uuidv4()} className="search__result-wrapper">
-            <div className="quran__badge-container">
-              <span className="search__result-list-badge">
+          <ul key={uuidv4()} className={style["search__result-wrapper"]}>
+            <div className={style["quran__badge-container"]}>
+              <span className={style["search__result-list-badge"]}>
                 <span>{prev + 1}</span>صفحه
               </span>
             </div>
@@ -90,7 +94,7 @@ const AllQuranPages = () => {
                     const surahNumber = index + 1;
                     const surahName = data[4];
 
-                    const cts = arr[i + 3] ? arr[i + 3] : arr[i + 1];
+                    const cts = arr[i + 3] ? arr[i + 3] : arr[i + 1]; //cts stands for condition
                     const ctsNum = arr[i + 3] ? 3 : 1;
 
                     if (
@@ -102,9 +106,11 @@ const AllQuranPages = () => {
                           ref={addToRefs}
                           id={`${surahNumber}`}
                           key={index}
-                          className="quran__banner-container"
+                          className={style["quran__banner-container"]}
                         >
-                          <p className="quran__text quran__title-text-weight">
+                          <p
+                            className={`${style["quran__text"]} ${style["quran__title-text-weight"]}`}
+                          >
                             {surahName}
                           </p>
                           <p>
@@ -133,7 +139,6 @@ const AllQuranPages = () => {
           </ul>
         </div>
       </section>
-      {/* <AudioPart /> */}
     </>
   );
 };

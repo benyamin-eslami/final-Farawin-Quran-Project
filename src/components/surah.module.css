@@ -1,11 +1,11 @@
-/* @font-face {
+@font-face {
   font-family: iranSans;
   src: url("../assets/fonts/IRANSansXFaNum-Regular.woff");
 }
 @font-face {
   font-family: quranFont;
   src: url("../assets/fonts/me-quran.woff");
-} */
+}
 
 ul {
   margin: 0;
@@ -118,8 +118,7 @@ nav ul {
   font-size: 0.9rem;
   color: #444444;
 }
-.aye__svg {
-}
+
 .filter {
   padding: 0 3rem;
 }
@@ -160,11 +159,15 @@ nav ul {
 }
 .filter__list button {
   cursor: pointer;
-
+  padding: 0.5rem;
   background: transparent;
   border: none;
+  border-radius: 0.3rem;
   font-size: 0.8rem;
   color: #f3f3f3;
+}
+.filter__list button:hover {
+  background: #ada491;
 }
 
 .filter__result-container {
@@ -182,6 +185,10 @@ nav ul {
   font-weight: bold;
   font-size: 0.9rem;
   border-radius: 0.5rem;
+}
+.filter__result-container-list:hover {
+  background-color: #e2ded6;
+  cursor: pointer;
 }
 .result__list-right {
   display: flex;
@@ -201,4 +208,21 @@ nav ul {
   padding: 0.6rem;
   border-radius: 100%;
   margin-right: 1rem;
+}
+.notfound {
+  text-align: center;
+}
+.result__list-right__safhe {
+  display: flex;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

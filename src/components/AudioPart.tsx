@@ -107,8 +107,6 @@ const AudioPart = () => {
     isClose && setIsShowTextSetting(false);
   };
 
-  !isPauesed && audioRef.current?.pause();
-
   return (
     <>
       <li

@@ -23,3 +23,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+@font-face {
+  font-family: iranSans;
+  src: url("./assets/fonts/IRANSansXFaNum-Regular.woff");
+}
+@font-face {
+  font-family: quranFont;
+  src: url("./assets/fonts/me-quran.woff");
+}

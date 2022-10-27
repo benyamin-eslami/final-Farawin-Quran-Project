@@ -1,9 +1,9 @@
 import { ChangeEvent, useState } from "react";
-import basfar from "../assets/img/basfar.jpg";
-import menshavi from "../assets/img/menshavi.png";
+import basfar from "../../assets/img/basfar.jpg";
+import menshavi from "../../assets/img/menshavi.png";
 import styles from "./Gharies.module.css";
-import { ghariAudioChangeHandler } from "./store/features/audio";
-import { useAppDispatch } from "./store/store";
+import { ghariAudioChangeHandler } from "../store/features/audio";
+import { useAppDispatch } from "../store/store";
 
 const Gharies = ({
   closeGhariHandler,

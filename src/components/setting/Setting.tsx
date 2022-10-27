@@ -1,11 +1,10 @@
 import styles from "./Setting.module.css";
-
 import Gharies from "./Gharies";
 import Translators from "./Translators";
 import TextSettings from "./TextSettings";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { selectFontFamily, selectFontSize } from "./store/store";
+import { selectFontFamily, selectFontSize } from "../store/store";
 
 const Setting = () => {
   const exampleText = useRef<HTMLParagraphElement>(null);

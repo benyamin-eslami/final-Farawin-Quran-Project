@@ -1,7 +1,7 @@
-import { pageSplitNumberArray } from "../datas/alllQuranPagesLogic";
+import { pageSplitNumberArray } from "../../datas/alllQuranPagesLogic";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { playAudioPage } from "./store/features/audio";
+import { playAudioPage } from "../store/features/audio";
 import style from "./safhe.module.css";
 interface SafhePropsTypes {
   search: any;

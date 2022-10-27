@@ -1,7 +1,8 @@
-import { useState } from "react";
-import Safhe from "./Safhe";
-import Surah from "./Surah";
+import { lazy, Suspense, useState } from "react";
+import LoadingSpinner from "../LoadingSpinner";
 import styles from "./search.module.css";
+
+const Surah = lazy(() => import("./Surah"));
 
 const Search = () => {
   const [search, setSearch] = useState<string>("");
@@ -22,6 +23,7 @@ const Search = () => {
       case "سوره":
         return <Surah search={searchTerm} />;
       case "صفحه":
+        const Safhe = lazy(() => import("./Safhe"));
         return <Safhe notFound={notFound} search={searchTerm} />;
       default:
         return <Surah search={searchTerm} />;
@@ -127,7 +129,9 @@ const Search = () => {
                 onChange={searchHandler}
               />
             </div>
-            {switchSearch(searchState, search)}
+            <Suspense fallback={<LoadingSpinner />}>
+              {switchSearch(searchState, search)}
+            </Suspense>
           </section>
         </section>
       </div>

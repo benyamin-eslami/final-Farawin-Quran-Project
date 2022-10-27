@@ -1,9 +1,8 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import fooladvandImg from "../assets/img/translator-fooladvand.0c7065d.png";
-import makaremImg from "../assets/img/translator-makarem.17a2064.png";
-import { translatorTextChangor } from "./store/features/setting";
-import { selectTranslator, useAppDispatch } from "./store/store";
+import { ChangeEvent, useState } from "react";
+import fooladvandImg from "../../assets/img/translator-fooladvand.0c7065d.png";
+import makaremImg from "../../assets/img/translator-makarem.17a2064.png";
+import { translatorTextChangor } from "../store/features/setting";
+import { useAppDispatch } from "../store/store";
 import styles from "./Translators.module.css";
 const Translators = ({
   closeTranslatorHandler,

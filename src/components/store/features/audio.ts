@@ -8,7 +8,6 @@ interface audioInitTypes {
   isPageStartPlaying: boolean;
   playAudioPage: boolean;
   isPauesed: boolean;
-  audioProgress: number;
 
   surahAyehStringGenerator: () => string;
 
@@ -41,7 +40,6 @@ const audioInitial: audioInitTypes = {
 
   ghariName: "Menshawi_16kbps",
   isPauesed: false,
-  audioProgress: 0,
 
   surahAyehStringGenerator() {
     return `${this.surahNumberNew}${this.ayehNumberNew}`;
@@ -92,9 +90,6 @@ const audioSlice = createSlice({
     pauseAudio(state, action: PayloadAction<boolean>) {
       state.isPauesed = action.payload;
     },
-    audioProgressHandler(state, action: PayloadAction<number>) {
-      state.audioProgress = action.payload;
-    },
     ghariAudioChangeHandler(state, action: PayloadAction<string | null>) {
       state.ghariName = action.payload ? action.payload : "Menshawi_16kbps";
     },
@@ -106,7 +101,6 @@ export const {
   playNextAudio,
   playAudioPage,
   pauseAudio,
-  audioProgressHandler,
   ghariAudioChangeHandler,
 } = audioSlice.actions;
 

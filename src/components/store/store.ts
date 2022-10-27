@@ -19,8 +19,6 @@ export const selectAudioSrc = (state: RootState) =>
 export const selectIsPlayAudioPage = (state: RootState) =>
   state.audio.playAudioPage;
 export const selectIsIsPauesed = (state: RootState) => state.audio.isPauesed;
-export const selectAudioProgress = (state: RootState) =>
-  state.audio.audioProgress;
 export const selectIsPageStartPlaying = (state: RootState) =>
   state.audio.isPageStartPlaying;
 export const selectSurahAyehStringGenerator = (state: RootState) =>

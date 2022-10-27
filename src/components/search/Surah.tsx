@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { QuranDataSura } from "../datas/quran-metadata";
-import { surahPages } from "../datas/alllQuranPagesLogic";
+import { QuranDataSura } from "../../datas/quran-metadata";
+import { surahPages } from "../../datas/alllQuranPagesLogic";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "./store/store";
-import { pauseAudio, playAudio } from "./store/features/audio";
+import { useAppDispatch } from "../store/store";
+import { playAudio, pauseAudio } from "../store/features/audio";
 import styles from "./surah.module.css";
 
 const Surah = ({ search }: { search: string }) => {

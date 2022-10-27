@@ -1,10 +1,9 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { ChangeEvent, useState } from "react";
 import {
   translateTextFontFamilyChangor,
   translateTextFontSizeChangor,
-} from "./store/features/setting";
-import { selectFontSize, useAppDispatch } from "./store/store";
+} from "../store/features/setting";
+import { useAppDispatch } from "../store/store";
 import styles from "./TextSettings.module.css";
 
 const TextSettings = ({
@@ -24,19 +23,6 @@ const TextSettings = ({
       ? localStorage.getItem("fontsize")
       : "average"
   );
-
-  // useEffect(() => {
-  //   const fontNameStorage = localStorage.getItem("fontname")
-  //     ? localStorage.getItem("fontname")
-  //     : "iranSans";
-
-  //   setFontName(fontNameStorage);
-
-  //   const fontSizeStorage = localStorage.getItem("fontname")
-  //     ? localStorage.getItem("fontsize")
-  //     : "average";
-  //   setfontSize(fontSizeStorage);
-  // }, []);
 
   const dispatch = useAppDispatch();
   const fontFamilyChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {

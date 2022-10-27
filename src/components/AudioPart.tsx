@@ -10,7 +10,7 @@ import fooladvandImg from "../assets/img/translator-fooladvand.0c7065d.png";
 import makaremImg from "../assets/img/translator-makarem.17a2064.png";
 import upArrow from "../assets/img/up-arrow.png";
 import styles from "./audiopart.module.css";
-import Gharies from "./Gharies";
+import Gharies from "./setting/Gharies";
 import { useSelector } from "react-redux";
 import {
   selectAudioSrc,
@@ -24,8 +24,8 @@ import {
   playNextAudio,
 } from "./store/features/audio";
 import { selectIsIsPauesed } from "./store/store";
-import Translators from "./Translators";
-import TextSettings from "./TextSettings";
+import Translators from "./setting/Translators";
+import TextSettings from "./setting/TextSettings";
 import {
   translateTextFontFamilyChangor,
   translateTextFontSizeChangor,

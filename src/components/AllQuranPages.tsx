@@ -37,10 +37,10 @@ const AllQuranPages = () => {
   const [next, setNextNumber] = useState<number>(+id + 2);
 
   const pageArr: number[] = pageSplitNumberArray.slice(prev, next);
-  //pages index for start and end of surah
+  //[start ayeh index,end ayeh index] per page
 
   const quranTextEmlaSliced = quranTextEmla.slice(pageArr[0], pageArr[1]);
-  //extracting indexex of ayeh
+  //extracting texts per page
 
   const nextChangeHandler = () => {
     if (next < pageSplitNumberArray.length && prev < 603) {
@@ -96,12 +96,15 @@ const AllQuranPages = () => {
                     const surahNumber = index + 1;
                     const surahName = data[4];
 
-                    const cts = arr[i + 3] ? arr[i + 3] : arr[i + 1]; //cts stands for condition
+                    const cts = arr[i + 3] ? arr[i + 3] : arr[i + 1];
+                    //cts stands for condition
                     const ctsNum = arr[i + 3] ? 3 : 1;
 
                     if (
                       ayeh === quranTextEmla[start] &&
+                      // check first ayeh of the page and start ..... with quran text emala array
                       cts === quranTextEmla[start + ctsNum]
+                      //check three ayeh after first or one ayeh after first ..... with quran text emala array
                     ) {
                       return (
                         <div

@@ -1,11 +1,10 @@
-import { pageSplitNumberArray } from "../../datas/alllQuranPagesLogic";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { playAudioPage } from "../store/features/audio";
 import style from "./safhe.module.css";
 interface SafhePropsTypes {
-  search: any;
-  notFound: any;
+  search: string;
+  notFound: string;
 }
 const Safhe = ({ search, notFound }: SafhePropsTypes) => {
   const dispatch = useDispatch();

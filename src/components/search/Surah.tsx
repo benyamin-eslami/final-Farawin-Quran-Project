@@ -20,6 +20,7 @@ const Surah = ({ search }: { search: string }) => {
   const searchFilter = surahIndex.filter((surah: any) => {
     return surah.surah[4]?.includes(search);
   });
+
   const content =
     searchFilter.length !== 0 ? (
       searchFilter.map((surah) => {

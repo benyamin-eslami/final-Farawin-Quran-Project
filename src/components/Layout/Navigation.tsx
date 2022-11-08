@@ -11,6 +11,9 @@ const Navigation = () => {
           <Link to="/search">
             <li className={styles["menu-list"]}>
               <img
+                loading="lazy"
+                width="1.9rem"
+                height="auto"
                 className={styles["openbookImg"]}
                 src={openBook}
                 alt="search"
@@ -41,7 +44,14 @@ const Navigation = () => {
 
           <div className={styles["home-nav"]}>
             <Link to="/main">
-              <img className={styles["haram-img"]} src={homeImg} alt="home" />
+              <img
+                height="auto"
+                width="3rem"
+                loading="lazy"
+                className={styles["haram-img"]}
+                src={homeImg}
+                alt="home"
+              />
             </Link>
           </div>
         </ul>

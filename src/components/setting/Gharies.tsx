@@ -56,7 +56,7 @@ const Gharies = ({
           />
           <div className={styles["translate-info__sec"]}>
             <p>منشاوی</p>
-            <img src={menshavi} alt="fooladvand" />
+            <img loading="lazy" src={menshavi} alt="fooladvand" />
           </div>
         </label>
         <label
@@ -73,7 +73,7 @@ const Gharies = ({
           />
           <div className={styles["translate-info__sec"]}>
             <p>عبد الله بن علي بصفر</p>
-            <img src={basfar} alt="makarem" />
+            <img loading="lazy" src={basfar} alt="makarem" />
           </div>
         </label>
       </div>

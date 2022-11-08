@@ -6,6 +6,12 @@ import { BrowserRouter } from "react-router-dom";
 import { store } from "./components/store/store";
 import { Provider } from "react-redux";
 
+if (navigator.serviceWorker) {
+  navigator.serviceWorker
+    .register("./service-worker.ts")
+    .then((reg) => console.log("installed"));
+}
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

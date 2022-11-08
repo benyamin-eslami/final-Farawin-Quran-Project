@@ -64,6 +64,7 @@ const AllQuranPages = () => {
             className={style["prev-arrow__wrapper"]}
           >
             <img
+              loading="lazy"
               className={style["arrow-img"]}
               src={backPageImg}
               onClick={prevChangeHandler}
@@ -74,6 +75,7 @@ const AllQuranPages = () => {
             className={style["next-arrow__wrapper"]}
           >
             <img
+              loading="lazy"
               className={style["arrow-img"]}
               src={nextPageImg}
               onClick={nextChangeHandler}

@@ -53,7 +53,7 @@ const Translators = ({
           />
           <div className={styles["translate-info__sec"]}>
             <p>فولادوند</p>
-            <img src={fooladvandImg} alt="fooladvand" />
+            <img loading="lazy" src={fooladvandImg} alt="fooladvand" />
           </div>
         </label>
         <label className={styles["translate-label"]} htmlFor="makarem">
@@ -67,7 +67,7 @@ const Translators = ({
           />
           <div className={styles["translate-info__sec"]}>
             <p>مکارم شیرازی</p>
-            <img src={makaremImg} alt="makarem" />
+            <img loading="lazy" src={makaremImg} alt="makarem" />
           </div>
         </label>
       </div>

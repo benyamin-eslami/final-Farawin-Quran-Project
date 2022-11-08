@@ -67,7 +67,14 @@ const Header = () => {
                 navigate(-1);
               }}
             >
-              <img className={styles["back__img"]} src={backImg} alt="back" />
+              <img
+                width="1.7rem"
+                height="1.7rem"
+                loading="lazy"
+                className={styles["back__img"]}
+                src={backImg}
+                alt="back"
+              />
             </div>
           </div>
         </div>

@@ -7,29 +7,11 @@ const Main = () => {
   return (
     <>
       <section className={style["main-content"]}>
-        <div className={style["date__container"]}>
-          <div className={style["date__container-pattern-holder"]}>
-            <div className={style["date__content-container"]}>
-              <div
-                className={`${style["date-section"]} ${style["date__ghamari"]}`}
-              >
-                <p>صفر1444 7</p>
-                <p>یا ذالجلال و الاکرام</p>
-              </div>
-              <div
-                className={`${style["date-section"]} ${style["date__shamsi"]}`}
-              >
-                <p>13</p>
-                <p>شهریور 1401</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className={style["app__menu"]}>
           <Link to={"/setting"} className={style["app__menu-container"]}>
             <div className={style["app__menu-item"]}>
               <img
+                loading="lazy"
                 className={style["app__menu-item__img"]}
                 src={settingLogo}
                 alt="setting"
@@ -40,6 +22,7 @@ const Main = () => {
           <Link to={"/search"} className={style["app__menu-container"]}>
             <div className={style["app__menu-item"]}>
               <img
+                loading="lazy"
                 className={style["app__menu-item__img"]}
                 src={quranSvg}
                 alt="quran"
